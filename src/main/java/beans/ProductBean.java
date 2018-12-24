@@ -4,6 +4,7 @@ public class ProductBean {
     private String pname;
     private double price;
     private String category;
+    private String description;
 
     public String getCategory() {
         return category;
@@ -12,8 +13,6 @@ public class ProductBean {
     public void setCategory(String category) {
         this.category = category;
     }
-
-    private String description;
 
     public String getPname() {
         return pname;

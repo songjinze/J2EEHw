@@ -6,15 +6,9 @@ import java.util.List;
 
 public interface ProductDaoService {
     /**
-     * 得到所有商品
+     * 得到商品
+     * category="" 则为获得所有商品
      * @return
      */
-    List<ProductBean> getAllProducts();
-
-    /**
-     * 根据分类获得商品
-     * @param category
-     * @return
-     */
-    List<ProductBean> getProductsByCategory(String category);
+    List<ProductBean> getProducts(String category);
 }
