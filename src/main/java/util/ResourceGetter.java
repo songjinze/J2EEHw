@@ -8,7 +8,7 @@ public class ResourceGetter {
      * @param filename
      * @return
      */
-    public static String getResourceFile(String filename){
+    public static String getResourceFileContext(String filename){
         StringBuilder builder=new StringBuilder("");
         try {
             InputStream inputStream = ResourceGetter.class.getResourceAsStream(filename);

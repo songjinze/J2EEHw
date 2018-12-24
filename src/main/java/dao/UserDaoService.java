@@ -16,4 +16,12 @@ public interface UserDaoService {
      * @return
      */
     boolean isCorrectPassword(String username,String password);
+
+    /**
+     *
+     * @param username
+     * @param passwd
+     * @return
+     */
+    boolean signUpOneUser(String username,String passwd);
 }

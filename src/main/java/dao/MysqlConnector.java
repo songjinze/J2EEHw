@@ -7,9 +7,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
 public class MysqlConnector {
@@ -33,7 +31,7 @@ public class MysqlConnector {
         }
     }
     private void initDatabase() throws SQLException{
-        con.createStatement().executeUpdate(ResourceGetter.getResourceFile("/init.sql"));
+        con.createStatement().executeUpdate(ResourceGetter.getResourceFileContext("/init.sql"));
     }
     
     public static MysqlConnector getInstance(){

@@ -3,11 +3,12 @@
 
 </head>
 <body>
-<h2>Hello World!</h2>
-<form method="post" action="/login">
-    <p>Username:<input type="text" name="uname" /></p>
-    <p>Password:<input type="text" name="passwd" /></p>
-    <input type="submit" value="submit" />
+<h2>Welcome!</h2>
+<form action="/loginPage">
+    <input type="submit" value="登录"/>
+</form>
+<form action="/signupPage">
+    <input type="submit" value="注册"/>
 </form>
 </body>
 </html>

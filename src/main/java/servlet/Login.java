@@ -21,13 +21,13 @@ public class Login extends HttpServlet {
         String password=(String)req.getAttribute("passwd");
         if(DaoFactory.getUserDaoService().hasUser(username)){
             if(DaoFactory.getUserDaoService().isCorrectPassword(username,password)) {
-                dispatcher = req.getRequestDispatcher("/goods");
+              dispatcher = req.getRequestDispatcher("/products");
             }else{
                 dispatcher=req.getRequestDispatcher("/error/errorpage");
             }
         }else{
             dispatcher=req.getRequestDispatcher("/error/errorpage");
         }
-        dispatcher.forward(req, resp);
+          dispatcher.forward(req, resp);
     }
 }
