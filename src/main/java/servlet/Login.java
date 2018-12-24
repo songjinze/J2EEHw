@@ -1,3 +1,5 @@
+package servlet;
+
 import dao.DaoFactory;
 
 import javax.servlet.RequestDispatcher;

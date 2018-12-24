@@ -1,29 +1,41 @@
 package dao;
 
+import util.ExceptionHandler;
+import util.ResourceGetter;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class MysqlConnector {
-    private static final String JDBC_DRIVER="com.mysql.cj.jdbc.Driver";
-    private static final String DB_URL="jdbc:mysql://localhost:3306/j2ee" +
-            "?serverTimezone=GMT%2B8";      //3036 is default port, sjz is my own database
-    private static final String user="root";
-    private static final String passwd="Sjz19980226";
 
     private volatile static MysqlConnector instance;
     private Connection con;
+
     private MysqlConnector(){
+        InitialContext jndiContext = null;
+        DataSource datasource;
+        Properties properties = new Properties();
+        properties.put(javax.naming.Context.PROVIDER_URL, "jnp:///");
+        properties.put(javax.naming.Context.INITIAL_CONTEXT_FACTORY, "org.apache.naming.java.javaURLContextFactory");
         try {
-            // 注册驱动
-            Class.forName(JDBC_DRIVER);
-            con= DriverManager.getConnection(DB_URL,user,passwd);
-        }catch(ClassNotFoundException | SQLException e){
-            // TODO 添加异常判断
+            jndiContext = new InitialContext(properties);
+            datasource = (DataSource) jndiContext.lookup("java:comp/env/jdbc/j2ee");
+            con=datasource.getConnection();
+            con.setAutoCommit(false);
+        } catch (NamingException |SQLException e) {
+            ExceptionHandler.handleException(e);
         }
     }
-
+    private void initDatabase() throws SQLException{
+        con.createStatement().executeUpdate(ResourceGetter.getResourceFile("/init.sql"));
+    }
+    
     public static MysqlConnector getInstance(){
         if(instance==null){
             synchronized (MysqlConnector.class){
@@ -34,7 +46,7 @@ public class MysqlConnector {
         }
         return instance;
     }
-    public Statement createStatement() throws SQLException{
-        return con.createStatement();
+    public Connection getConnection() {
+        return MysqlConnector.getInstance().con;
     }
 }
