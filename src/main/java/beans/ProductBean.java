@@ -1,6 +1,8 @@
 package beans;
 
-public class ProductBean {
+import java.io.Serializable;
+
+public class ProductBean implements Serializable {
     private String pname;
     private double price;
     private String category;

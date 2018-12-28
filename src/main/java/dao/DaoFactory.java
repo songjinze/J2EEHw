@@ -4,7 +4,7 @@ public class DaoFactory {
     public static UserDaoService getUserDaoService(){
         return new UserDAO();
     }
-    public static ProductDaoService getGoodDaoService(){
+    public static ProductDaoService getProductDaoService(){
         return new ProductDAO();
     }
 }

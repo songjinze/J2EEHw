@@ -2,6 +2,6 @@
 <Context>
     <Resource name="jdbc/j2ee" auth="Container" type="javax.sql.DataSource"
               maxActive="50" maxIdle="30" maxWait="10000" logAbandoned="true"
-              username="root" password="Sjz19980226" driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/j2ee?characterEncoding=UTF8"/>
+              username="root" password="Sjz19980226" driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/j2ee?characterEncoding=UTF8&amp;serverTimezone=UTC"/>
 </Context>

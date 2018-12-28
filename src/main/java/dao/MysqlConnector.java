@@ -32,6 +32,7 @@ public class MysqlConnector {
     }
     private void initDatabase() throws SQLException{
         con.createStatement().executeUpdate(ResourceGetter.getResourceFileContext("/init.sql"));
+        con.commit();
     }
     
     public static MysqlConnector getInstance(){
@@ -44,6 +45,14 @@ public class MysqlConnector {
         }
         return instance;
     }
+    public void commitCon(){
+        try {
+            MysqlConnector.getInstance().con.commit();
+        } catch (SQLException e) {
+            ExceptionHandler.handleException(e);
+        }
+    }
+
     public Connection getConnection() {
         return MysqlConnector.getInstance().con;
     }

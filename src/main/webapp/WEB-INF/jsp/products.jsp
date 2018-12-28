@@ -1,4 +1,8 @@
-<%--
+<%@ page import="dao.ProductDaoService" %>
+<%@ page import="dao.DaoFactory" %>
+<%@ page import="beans.ProductBean" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.io.PrintWriter" %><%--
   Created by IntelliJ IDEA.
   User: 73460
   Date: 2018/12/23
@@ -9,8 +13,27 @@
 <html>
 <head>
     <title>goods</title>
+    <%
+        ProductDaoService productDaoService= DaoFactory.getProductDaoService();
+        List<ProductBean> productBeanList=productDaoService.getProducts("");
+    %>
 </head>
 <body>
-<p>this is goods page!</p>
+<table>
+    <tr>
+        <%
+            out.print("<th>Name</th>");
+            out.print("<th>Price</th>");
+        %>
+    </tr>
+    <%
+        for(ProductBean productBean:productBeanList){
+            out.print("<tr>");
+            out.print("<td>"+productBean.getPname()+"</td>");
+            out.print("<td>"+productBean.getPrice()+"</td>");
+            out.print("</tr>");
+        }
+    %>
+</table>
 </body>
 </html>

@@ -17,7 +17,7 @@ public class UserDAO implements UserDaoService{
             PreparedStatement preparedStatement=MysqlConnector.getInstance().getConnection().prepareStatement(ResourceGetter.getResourceFileContext(userScript));
             preparedStatement.setString(1, username);
             ResultSet resultSet=preparedStatement.executeQuery();
-            if(resultSet.getString("uname")!=null){
+            if(resultSet.next()&&resultSet.getString("uname")!=null){
                 return true;
             }
             preparedStatement.close();
@@ -36,7 +36,7 @@ public class UserDAO implements UserDaoService{
             PreparedStatement preparedStatement=MysqlConnector.getInstance().getConnection().prepareStatement(ResourceGetter.getResourceFileContext(userScript));
             preparedStatement.setString(1,username);
             ResultSet resultSet=preparedStatement.executeQuery();
-            if(resultSet.getString("passwd").equals(password)){
+            if(resultSet.next()&&resultSet.getString("passwd").equals(password)){
                 return true;
             }
             preparedStatement.close();
@@ -59,6 +59,7 @@ public class UserDAO implements UserDaoService{
             if(resultRowCount!=0){
                 return true;
             }
+            MysqlConnector.getInstance().commitCon();
             preparedStatement.close();
         }catch(SQLException e){
             ExceptionHandler.handleException(e);
