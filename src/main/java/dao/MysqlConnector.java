@@ -26,12 +26,15 @@ public class MysqlConnector {
             datasource = (DataSource) jndiContext.lookup("java:comp/env/jdbc/j2ee");
             con=datasource.getConnection();
             con.setAutoCommit(false);
+            initDatabase();
         } catch (NamingException |SQLException e) {
             ExceptionHandler.handleException(e);
         }
     }
     private void initDatabase() throws SQLException{
-        con.createStatement().executeUpdate(ResourceGetter.getResourceFileContext("/init.sql"));
+        con.createStatement().executeUpdate(ResourceGetter.getResourceFileContext("/initProducts.sql"));
+        con.createStatement().executeUpdate(ResourceGetter.getResourceFileContext("/initUser.sql"));
+        con.createStatement().executeUpdate(ResourceGetter.getResourceFileContext("/addData.sql"));
         con.commit();
     }
     

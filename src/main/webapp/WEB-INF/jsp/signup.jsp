@@ -11,10 +11,16 @@
     <title>signUp</title>
 </head>
 <body>
-<form method="post" action="/signup">
-    <p>username:<input type="text" name="uname" /></p>
-    <p>password:<input type="text" name="password"/></p>
-    <p>confirm password:<input type="text" name="confirmPasswd" /></p>
+<form method="post" action="${pageContext.request.contextPath}/signup">
+    <p>username:<label>
+        <input type="text" name="uname" />
+    </label></p>
+    <p>password:<label>
+        <input type="text" name="password"/>
+    </label></p>
+    <p>confirm password:<label>
+        <input type="text" name="confirmPasswd" />
+    </label></p>
     <input type="submit" value="submit"/>
 </form>
 </body>

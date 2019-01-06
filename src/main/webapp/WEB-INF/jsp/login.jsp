@@ -12,9 +12,13 @@
 </head>
 <body>
 <h2>Welcome!</h2>
-<form method="post" action="/login">
-    <p>Username:<input type="text" name="uname" /></p>
-    <p>Password:<input type="text" name="passwd" /></p>
+<form method="post" action="${pageContext.request.contextPath}/login">
+    <p>Username:<label>
+        <input type="text" name="uname" />
+    </label></p>
+    <p>Password:<label>
+        <input type="text" name="passwd" />
+    </label></p>
     <input type="submit" name="login" />
 </form>
 </body>

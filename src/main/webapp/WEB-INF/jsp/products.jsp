@@ -1,8 +1,8 @@
-<%@ page import="dao.ProductDaoService" %>
-<%@ page import="dao.DaoFactory" %>
 <%@ page import="beans.ProductBean" %>
-<%@ page import="java.util.*" %>
-<%@ page import="java.io.PrintWriter" %><%--
+<%@ page import="dao.DaoFactory" %>
+<%@ page import="dao.ProductDaoService" %>
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: 73460
   Date: 2018/12/23

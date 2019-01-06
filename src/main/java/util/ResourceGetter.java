@@ -19,7 +19,9 @@ public class ResourceGetter {
         }catch(IOException e){
             ExceptionHandler.handleException(e);
         }
-        return builder.toString();
-
+        String res= builder.toString();
+        res=res.replaceAll("\r\n","");
+        res=res.replaceAll("\n","");
+        return res;
     }
 }
