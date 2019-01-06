@@ -11,3 +11,7 @@ create table if not exists `products`(
   category varchar(20) not null.
   description varchar(255)
 );
+insert into `products` (`pname`,`price`,`category`,`description`) values
+("iphone",6499,"phone","this is iphone!"),
+("ipad",6000,"pad","this is ipad"),
+("mac",9999,"computer","this is imac");
