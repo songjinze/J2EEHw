@@ -26,6 +26,7 @@ public class MysqlConnector {
             datasource = (DataSource) jndiContext.lookup("java:comp/env/jdbc/j2ee");
             con=datasource.getConnection();
             con.setAutoCommit(false);
+            initDatabase();
         } catch (NamingException |SQLException e) {
             ExceptionHandler.handleException(e);
         }
