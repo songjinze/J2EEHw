@@ -1,10 +1,11 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartBean {
-    private List<String> productNames;
-    private List<Integer> productNums;
+    private List<String> productNames=new ArrayList<>();
+    private List<Integer> productNums=new ArrayList<>();
 
     public List<String> getProductNames() {
         return productNames;

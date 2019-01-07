@@ -2,6 +2,7 @@
 <%@ page import="dao.DaoFactory" %>
 <%@ page import="dao.ProductDaoService" %>
 <%@ page import="java.util.List" %>
+<%@ page import="beans.ShoppingCartBean" %>
 <%--
   Created by IntelliJ IDEA.
   User: 73460
@@ -35,5 +36,33 @@
         }
     %>
 </table>
+<table>
+    <tr>
+        <th>商品名称</th>
+        <th>商品数量</th>
+    </tr>
+    <%
+        ShoppingCartBean shoppingCartBean=(ShoppingCartBean) session.getAttribute("shoppingCart");
+        if(shoppingCartBean!=null){
+            int count=0;
+            int productNum=0;
+            List<Integer> productNums=shoppingCartBean.getProductNums();
+            for(String productName:shoppingCartBean.getProductNames()){
+                productNum=productNums.get(count);
+                out.print("<tr>");
+                out.print("<td>"+productName+"</td>");
+                out.print("<td>"+productNum+"</td>");
+                out.print("</tr>");
+                count++;
+            }
+        }
+    %>
+</table>
+<form action="${pageContext.request.contextPath}/addShopList" method="post">
+    <p>添加商品名称：<label>
+        <input type="text" name="product"/>
+    </label></p>
+    <input type="submit"/>
+</form>
 </body>
 </html>

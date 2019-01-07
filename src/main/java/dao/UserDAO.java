@@ -57,9 +57,9 @@ public class UserDAO implements UserDaoService{
             preparedStatement.setString(2,passwd);
             int resultRowCount=preparedStatement.executeUpdate();
             if(resultRowCount!=0){
+                MysqlConnector.getInstance().commitCon();
                 return true;
             }
-            MysqlConnector.getInstance().commitCon();
             preparedStatement.close();
         }catch(SQLException e){
             ExceptionHandler.handleException(e);

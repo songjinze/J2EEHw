@@ -52,6 +52,7 @@ public class AddShopList extends HttpServlet {
                 shoppingCartBean.getProductNames().add(products);
                 shoppingCartBean.getProductNums().add(1);
             }
+            session.setAttribute("shoppingCart",shoppingCartBean);
         }
         try {
             dispatcher.forward(request,response);
