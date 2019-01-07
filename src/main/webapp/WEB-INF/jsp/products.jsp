@@ -3,6 +3,7 @@
 <%@ page import="dao.ProductDaoService" %>
 <%@ page import="java.util.List" %>
 <%@ page import="beans.ShoppingCartBean" %>
+<%@ page import="listener.SessionListener" %>
 <%--
   Created by IntelliJ IDEA.
   User: 73460
@@ -20,6 +21,9 @@
     %>
 </head>
 <body>
+<p>
+    当前在线用户数：<%=SessionListener.getSessionNumber()%>
+</p>
 <table>
     <tr>
         <%
@@ -42,7 +46,7 @@
         <th>商品数量</th>
     </tr>
     <%
-        ShoppingCartBean shoppingCartBean=(ShoppingCartBean) session.getAttribute("shoppingCart");
+        ShoppingCartBean shoppingCartBean=(ShoppingCartBean) request.getSession().getAttribute("shoppingCart");
         if(shoppingCartBean!=null){
             int count=0;
             int productNum=0;

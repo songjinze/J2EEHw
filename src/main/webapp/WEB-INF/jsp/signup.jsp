@@ -21,7 +21,7 @@
     <p>confirm password:<label>
         <input type="text" name="confirmPasswd" />
     </label></p>
-    <input type="submit" value="submit"/>
+    <input type="submit" value="注册"/>
 </form>
 </body>
 </html>

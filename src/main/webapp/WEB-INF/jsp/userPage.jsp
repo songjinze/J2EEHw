@@ -1,4 +1,4 @@
-<%--
+<%@ page import="listener.SessionListener" %><%--
   Created by IntelliJ IDEA.
   User: jinze
   Date: 2019/1/7
@@ -11,6 +11,8 @@
     <title>userPage</title>
 </head>
 <body>
-
+<p>
+    当前在线用户数：<%=SessionListener.getSessionNumber()%>
+</p>
 </body>
 </html>
