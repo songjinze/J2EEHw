@@ -1,1 +1,0 @@
-insert into `user` (`uname`, `passwd`) values (?,?);
