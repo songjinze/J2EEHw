@@ -25,12 +25,21 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging
+    compile group: 'org.jboss.logging', name: 'jboss-logging', version: '3.3.2.Final'
+    // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
+    // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
+    compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.0'
+    // https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api
+    compileOnly group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version: '2.3.3'
+
 }
 
 ear {
     appDirName 'src/main/app'  // use application metadata found in this folder
     // put dependent libraries into APP-INF/lib inside the generated EAR
     libDirName 'APP-INF/lib'
+
     deploymentDescriptor {  // custom entries for application.xml:
 //      fileName = "application.xml"  // same as the default value
 //      version = "6"  // same as the default value
@@ -45,4 +54,24 @@ ear {
 //      securityRole "admin"
 //      securityRole "superadmin"
     }
+}
+
+sourceSets{
+    main{
+        java{
+            srcDirs=['src/main/java']
+        }
+        resources{
+            srcDirs=['src/main/resources']
+        }
+    }
+    test{
+        java{
+            srcDirs=['src/test/java']
+        }
+        resources {
+            srcDirs=['src/test/resources']
+        }
+    }
+    setWebAppDirName('src/main/webapp')
 }
