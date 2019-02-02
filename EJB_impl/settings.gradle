@@ -1,2 +1,3 @@
-rootProject.name = 'J2eeHw'
+include 'EJBRemote'
+include 'EJBClient'
 
