@@ -1,69 +1,71 @@
 package dao;
 
+import beans.UserBean;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import util.ExceptionHandler;
-import util.ResourceGetter;
+import util.HibernateUtil;
 
-import java.sql.*;
+import java.util.List;
+
 
 public class UserDAO implements UserDaoService{
 
-    private final String userScript="/getUser.sql";
-    @Override
-    public boolean hasUser(String username) {
-        if(username==null){
-            return false;
-        }
-        try {
-            PreparedStatement preparedStatement=MysqlConnector.getInstance().getConnection().prepareStatement(ResourceGetter.getResourceFileContext(userScript));
-            preparedStatement.setString(1, username);
-            ResultSet resultSet=preparedStatement.executeQuery();
-            if(resultSet.next()&&resultSet.getString("uname")!=null){
-                return true;
-            }
-            preparedStatement.close();
-        } catch (SQLException e) {
-            ExceptionHandler.handleException(e);
-        }
-        return false;
-    }
 
     @Override
-    public boolean isCorrectPassword(String username, String password) {
-        if(username==null||password==null){
-            return false;
-        }
-        try {
-            PreparedStatement preparedStatement=MysqlConnector.getInstance().getConnection().prepareStatement(ResourceGetter.getResourceFileContext(userScript));
-            preparedStatement.setString(1,username);
-            ResultSet resultSet=preparedStatement.executeQuery();
-            if(resultSet.next()&&resultSet.getString("passwd").equals(password)){
-                return true;
-            }
-            preparedStatement.close();
-        }catch(SQLException e){
-            ExceptionHandler.handleException(e);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean signUpOneUser(String username, String passwd) {
-        if(username==null||passwd==null){
-            return false;
-        }
+    public UserBean getUserByUname(String username) {
+        SessionFactory sessionFactory=null;
+        Transaction transaction=null;
+        Session session=null;
         try{
-            PreparedStatement preparedStatement=MysqlConnector.getInstance().getConnection().prepareStatement(ResourceGetter.getResourceFileContext("/signUp.sql"));
-            preparedStatement.setString(1,username);
-            preparedStatement.setString(2,passwd);
-            int resultRowCount=preparedStatement.executeUpdate();
-            if(resultRowCount!=0){
-                MysqlConnector.getInstance().commitCon();
-                return true;
+            sessionFactory=HibernateUtil.getSessionFactory();
+            session=sessionFactory.openSession();
+            transaction=session.beginTransaction();
+            Query query=session.createQuery("from UserBean where uname = :uname");
+            query.setParameter("uname",username);
+            System.out.println("ahahha");
+            List<UserBean> userBeanList=(List<UserBean>)query.list();
+            transaction.commit();
+            if(userBeanList.size()==1){
+                return userBeanList.get(0);
+            }else{
+                return null;
             }
-            preparedStatement.close();
-        }catch(SQLException e){
-            ExceptionHandler.handleException(e);
+        }catch (Exception e){
+            transaction.rollback();
+        }finally{
+            session.close();
+            sessionFactory.close();
         }
-        return false;
+        return null;
+    }
+
+    @Override
+    public boolean insertUser(String uname, String passwd, double balance) {
+        UserBean user=new UserBean();
+        user.setUname(uname);
+        user.setBalance(balance);
+        user.setPasswd(passwd);
+        SessionFactory sessionFactory=null;
+        Transaction transaction=null;
+        Session session=null;
+        try{
+            sessionFactory= HibernateUtil.getSessionFactory();
+            session=sessionFactory.openSession();
+            transaction=session.beginTransaction();
+            session.save(user);
+            transaction.commit();
+        }catch (Exception e){
+            assert transaction != null;
+            ExceptionHandler.handleException(e);
+            transaction.rollback();
+        }finally {
+            assert session != null;
+            session.close();
+            sessionFactory.close();
+        }
+        return true;
     }
 }

@@ -4,6 +4,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="beans.ShoppingCartBean" %>
 <%@ page import="listener.SessionListener" %>
+<%@ page import="service.ProductBusinessService" %>
+<%@ page import="service.ServiceFactory" %>
 <%--
   Created by IntelliJ IDEA.
   User: 73460
@@ -16,8 +18,8 @@
 <head>
     <title>goods</title>
     <%
-        ProductDaoService productDaoService= DaoFactory.getProductDaoService();
-        List<ProductBean> productBeanList=productDaoService.getProducts("");
+        ProductBusinessService productBusinessService= ServiceFactory.getProductBusinessService();
+        List<ProductBean> productBeanList=productBusinessService.getProducts("");
     %>
 </head>
 <body>

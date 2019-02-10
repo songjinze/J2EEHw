@@ -1,6 +1,6 @@
 package servlet;
 
-import dao.DaoFactory;
+import service.ServiceFactory;
 import util.ExceptionHandler;
 
 import javax.servlet.RequestDispatcher;
@@ -27,7 +27,7 @@ public class SignUp extends HttpServlet {
         if(!password.equals(confirmPasswd)){
             dispatcher=req.getRequestDispatcher("/error/errorpage");
         }
-        boolean result=DaoFactory.getUserDaoService().signUpOneUser(username,password);
+        boolean result= ServiceFactory.getUserBusinessService().signUpOneUser(username,password);
         if(result) {
             dispatcher = req.getRequestDispatcher("/login");
         }else{
