@@ -1,11 +1,10 @@
 package service;
 
 import beans.UserBean;
-import dao.DaoFactory;
 import dao.UserDaoService;
 
 public class UserBusinessServiceImpl implements UserBusinessService {
-    private UserDaoService userDaoService= DaoFactory.getUserDaoService();
+    private UserDaoService userDaoService;
     @Override
     public boolean hasUser(String username) {
         UserBean userBean=userDaoService.getUserByUname(username);
@@ -28,5 +27,9 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     public boolean signUpOneUser(String username, String passwd) {
         userDaoService.insertUser(username,passwd,0);
         return true;
+    }
+
+    public void setUserDaoService(UserDaoService userDaoService) {
+        this.userDaoService = userDaoService;
     }
 }

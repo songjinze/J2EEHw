@@ -1,7 +1,6 @@
 package service;
 
 import beans.ProductBean;
-import dao.DaoFactory;
 import dao.ProductDaoService;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class ProductBusinessServiceImpl implements ProductBusinessService {
 
-    private ProductDaoService productDaoService= DaoFactory.getProductDaoService();
+    private ProductDaoService productDaoService;
     @Override
     public List<ProductBean> getProducts(String category) {
         if(category.equals("")){
@@ -17,5 +16,9 @@ public class ProductBusinessServiceImpl implements ProductBusinessService {
         }else {
             return productDaoService.getProductsByCategory(category);
         }
+    }
+
+    public void setProductDaoService(ProductDaoService productDaoService) {
+        this.productDaoService = productDaoService;
     }
 }

@@ -1,10 +1,17 @@
 package service;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class ServiceFactory {
     public static UserBusinessService getUserBusinessService(){
-        return new UserBusinessServiceImpl();
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("beans.xml");
+        return (UserBusinessService) context.getBean("userBusinessService");
     }
     public static ProductBusinessService getProductBusinessService(){
-        return new ProductBusinessServiceImpl();
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("beans.xml");
+        return (ProductBusinessService) context.getBean("productBusinessService");
     }
 }

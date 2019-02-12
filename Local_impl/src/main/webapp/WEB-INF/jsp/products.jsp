@@ -1,11 +1,9 @@
 <%@ page import="beans.ProductBean" %>
-<%@ page import="dao.DaoFactory" %>
-<%@ page import="dao.ProductDaoService" %>
-<%@ page import="java.util.List" %>
 <%@ page import="beans.ShoppingCartBean" %>
 <%@ page import="listener.SessionListener" %>
 <%@ page import="service.ProductBusinessService" %>
 <%@ page import="service.ServiceFactory" %>
+<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: 73460

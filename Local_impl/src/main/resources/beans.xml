@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="productBusinessService" class="service.ProductBusinessServiceImpl">
+        <property name="productDaoService" ref="productDaoService" />
+    </bean>
+    <bean id="userBusinessService" class="service.UserBusinessServiceImpl">
+        <property name = "userDaoService" ref="userDaoService" />
+    </bean>
+    <bean id="userDaoService" class="dao.UserDAO" />
+
+    <bean id="productDaoService" class="dao.ProductDAO" />
+
+
+</beans>
